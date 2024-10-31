@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from flask import copy_current_request_context
 from viewLog import view_the_log
-from testFunctions import the_new_arrival
+from testFunctions import the_new_arrival, create_sample_excel
 from markupsafe import escape
 from threading import Thread
 from werkzeug.utils import secure_filename
@@ -32,6 +32,12 @@ departmentList = [
     '湖口分隊', '新工分隊', '新埔分隊',  '關西分隊', '芎林分隊'
 ]
 
+
+@app.route('/xlsOutput', methods=['GET', 'POST'])
+def sample_excel() -> 'html':
+    create_sample_excel()
+    return render_template('entry2.html',
+                           the_title='Create sample excel')
 
 
 @app.route('/viewlog', methods=['GET', 'POST'])
