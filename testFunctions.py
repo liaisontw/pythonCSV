@@ -86,7 +86,43 @@ def create_sample_excel() -> 'html':
     # 儲存 Excel 檔案
     wb.save('styled_example.xlsx')
 
+def the_department(path) -> 'html':    
+    contents = []
+    files = glob.glob(os.path.join(path, "*.csv"))
+    file_name = ''
+    rCount = 0
     
+    for file in files: 
+        file_name = os.path.basename(file)
+        sourceFile = open(file, "r",encoding="utf-8")
+        sourceReader = csv.reader(sourceFile)
+        if file_name == "testList2.csv":
+            for row in sourceReader:
+                if sourceReader.line_num == 1:
+                    iCount = 0;
+                    for item in row:
+                        match item:
+                            case '部門':
+                                field_1 = iCount
+                        iCount += 1
+                    continue    # skip first row
+                else:
+                    found = 0
+                    for department in contents:
+                        if (department[0] == row[field_1]):
+                            found = 1
+                    if (found == 0):
+                        contents.append([])
+                        contents[-1].append(row[field_1])
+                        rCount += 1
+                    
+    titles = ('部門')
+    return render_template('viewlog.html',
+                           the_title='Department',
+                           the_file=file_name,
+                           row_count=rCount,
+                           the_row_titles=titles,
+                           the_data=contents,)
 
 
 def the_new_arrival(path) -> 'html':    
