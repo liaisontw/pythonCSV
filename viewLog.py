@@ -18,9 +18,6 @@ FAILED_SECOND = set(['王美琴', '陳聖妮', '廖耿徽', '賴冠龍'])
 def failedOne(name, failedSet):
     return name in failedSet
 
-def failedSecond(name):
-    return name in FAILED_SECOND
-
 def the_new_arrival(path) -> 'html':    
     contents_new = []
     files = glob.glob(os.path.join(path, "*.csv"))
