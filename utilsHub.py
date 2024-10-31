@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from flask import copy_current_request_context
-from viewLog import view_the_log, the_new_arrival
+from viewLog import view_the_log
+from testFunctions import the_new_arrival
 from markupsafe import escape
 from threading import Thread
 from werkzeug.utils import secure_filename
